@@ -1,13 +1,12 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import type React from "react"
+import { useState } from "react";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface QueryFormModalProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps) {
@@ -16,24 +15,51 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
     phone: "",
     city: "",
     message: "",
-  })
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Query form submitted:", formData)
-    alert("Thank you for your inquiry! We will contact you soon.")
-    setFormData({ name: "", phone: "", city: "", message: "" })
-    onClose()
-  }
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          email: "N/A", // Modal does not have email, so send placeholder
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Thank you! We will contact you soon.");
+        setFormData({ name: "", phone: "", city: "", message: "" });
+        onClose();
+      } else {
+        alert("Failed to send query. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
+
+    setLoading(false);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
@@ -98,11 +124,11 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
             />
           </div>
 
-          <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-            Send Query
+          <Button type="submit" disabled={loading} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+            {loading ? "Sending..." : "Send Query"}
           </Button>
         </form>
       </div>
     </div>
-  )
+  );
 }

@@ -29,7 +29,7 @@ export default function BlogCard({ post }: any) {
           <span>{post.date}</span>
         </div>
 
-        <Link href="#" className="inline-block text-sm font-semibold text-primary hover:text-accent transition">
+        <Link href={post.redirect || ""} download={post?.isDownload} className="inline-block text-sm font-semibold text-primary hover:text-accent transition">
           Read More →
         </Link>
       </div>

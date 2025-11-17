@@ -10,6 +10,8 @@ const blogPosts = [
     date: "Nov 8, 2024",
     category: "Government Schemes",
     image: "/government-scheme-solar-subsidy-guide.jpg",
+    redirect: "/Complete-Guide-to-PMSuryaGharYojana.pdf",
+    isDownload: true
   },
   {
     id: 2,
@@ -18,6 +20,8 @@ const blogPosts = [
     date: "Nov 5, 2024",
     category: "Cost Savings",
     image: "/solar-energy-savings-calculator-chart.jpg",
+    redirect: "https://api.solarrooftop.gov.in/rooftop_calculator",
+    isDownload: false
   },
   {
     id: 3,
@@ -26,6 +30,8 @@ const blogPosts = [
     date: "Nov 1, 2024",
     category: "Maintenance",
     image: "/solar-panel-cleaning-maintenance.jpg",
+    redirect: "#contact",
+    isDownload: false
   },
   {
     id: 4,
@@ -34,6 +40,8 @@ const blogPosts = [
     date: "Oct 28, 2024",
     category: "Technology",
     image: "/monocrystalline-vs-polycrystalline-solar-panels.jpg",
+    redirect: "#contact",
+    isDownload: false
   },
   {
     id: 5,
@@ -42,6 +50,8 @@ const blogPosts = [
     date: "Oct 25, 2024",
     category: "Benefits",
     image: "/benefits-of-solar-energy-renewable.jpg",
+    redirect: "#contact",
+    isDownload: false
   },
   {
     id: 6,
@@ -50,6 +60,8 @@ const blogPosts = [
     date: "Oct 22, 2024",
     category: "Installation",
     image: "/placeholder.svg?height=300&width=400",
+    redirect: "#contact",
+    isDownload: false
   },
 ]
 

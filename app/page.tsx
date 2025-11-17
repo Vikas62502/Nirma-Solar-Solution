@@ -153,6 +153,8 @@ const blogPosts = [
     date: "Nov 8, 2024",
     category: "Government Schemes",
     image: "/government-scheme-solar-subsidy-guide.jpg",
+    redirect: "/Complete-Guide-to-PMSuryaGharYojana.pdf",
+    isDownload: true
   },
   {
     id: 2,
@@ -161,6 +163,8 @@ const blogPosts = [
     date: "Nov 5, 2024",
     category: "Cost Savings",
     image: "/solar-energy-savings-calculator-chart.jpg",
+    redirect: "https://api.solarrooftop.gov.in/rooftop_calculator",
+    isDownload: false
   },
   {
     id: 3,
@@ -169,6 +173,8 @@ const blogPosts = [
     date: "Nov 1, 2024",
     category: "Maintenance",
     image: "/solar-panel-cleaning-maintenance.jpg",
+    redirect: "#contact",
+    isDownload: false
   },
   {
     id: 4,
@@ -177,6 +183,8 @@ const blogPosts = [
     date: "Oct 28, 2024",
     category: "Technology",
     image: "/monocrystalline-vs-polycrystalline-solar-panels.jpg",
+    redirect: "#contact",
+    isDownload: false
   },
   {
     id: 5,
@@ -185,6 +193,8 @@ const blogPosts = [
     date: "Oct 25, 2024",
     category: "Benefits",
     image: "/benefits-of-solar-energy-renewable.jpg",
+    redirect: "#contact",
+    isDownload: false
   },
   {
     id: 6,
@@ -193,6 +203,8 @@ const blogPosts = [
     date: "Oct 22, 2024",
     category: "Installation",
     image: "/placeholder.svg?height=300&width=400",
+    redirect: "#contact",
+    isDownload: false
   },
 ]
 
@@ -224,7 +236,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="portfolio" className="py-12 md:py-16 px-4">
+      {/* <section id="portfolio" className="py-12 md:py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 md:mb-4 text-balance">
             Our Completed Projects
@@ -234,7 +246,7 @@ export default function Home() {
           </p>
           <PortfolioCarousel projects={projects} />
         </div>
-      </section>
+      </section> */}
 
       <section id="blog" className="py-12 md:py-16 px-4 bg-secondary">
         <div className="max-w-6xl mx-auto">
@@ -260,20 +272,36 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mb-12 md:mb-16">
             <div className="bg-background border border-border p-4 md:p-6 rounded-lg text-center">
-              <Phone className="w-6 md:w-8 h-6 md:h-8 text-primary mx-auto mb-3 md:mb-4" />
-              <h3 className="font-bold text-foreground mb-2 text-sm md:text-base">Phone</h3>
-              <p className="text-muted-foreground text-xs md:text-sm">+91-XXX-XXX-XXXX</p>
+              <a href="tel:+918233452412">
+                <Phone className="w-6 md:w-8 h-6 md:h-8 text-primary mx-auto mb-3 md:mb-4" />
+                <h3 className="font-bold text-foreground mb-2 text-sm md:text-base">Phone</h3>
+                <p className="text-muted-foreground text-xs md:text-sm">+91-8233452412</p>
+              </a>
             </div>
+
             <div className="bg-background border border-border p-4 md:p-6 rounded-lg text-center">
-              <Phone className="w-6 md:w-8 h-6 md:h-8 text-primary mx-auto mb-3 md:mb-4" />
-              <h3 className="font-bold text-foreground mb-2 text-sm md:text-base">Email</h3>
-              <p className="text-muted-foreground text-xs md:text-sm">info@solarflow.com</p>
+              <a href="mailto:nirmasolarsolutions@gmail.com">
+                <Phone className="w-6 md:w-8 h-6 md:h-8 text-primary mx-auto mb-3 md:mb-4" />
+                <h3 className="font-bold text-foreground mb-2 text-sm md:text-base">Email</h3>
+                <p className="text-muted-foreground text-xs md:text-sm">nirmasolarsolutions@gmail.com</p>
+              </a>
             </div>
             <div className="bg-background border border-border p-4 md:p-6 rounded-lg text-center sm:col-span-2 lg:col-span-1">
-              <Phone className="w-6 md:w-8 h-6 md:h-8 text-primary mx-auto mb-3 md:mb-4" />
-              <h3 className="font-bold text-foreground mb-2 text-sm md:text-base">Address</h3>
-              <p className="text-muted-foreground text-xs md:text-sm">Gurgaon, Haryana, India</p>
+              <a
+                href="https://www.google.com/maps?q=26.982536670644436,75.76168963960323"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Phone className="w-6 md:w-8 h-6 md:h-8 text-primary mx-auto mb-3 md:mb-4" />
+                <h3 className="font-bold text-foreground mb-2 text-sm md:text-base">Address</h3>
+                <p className="text-muted-foreground text-xs md:text-sm">
+                  102, Anjani Apartment, Pratap Nagar Ext, Vaid Ji Ka Chauraha,<br />
+                  Murlipura, Jaipur, Rajasthan, 302039
+                </p>
+              </a>
             </div>
+x
+
           </div>
 
           <div className="max-w-2xl mx-auto">

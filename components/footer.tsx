@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
           <div>
             <Link href="/" className="text-xl md:text-2xl font-bold text-primary mb-4 inline-block">
-              SolarFlow
+              Nirma Solar
             </Link>
             <p className="text-muted-foreground text-xs md:text-sm">
               Transforming homes with clean, sustainable solar energy solutions.

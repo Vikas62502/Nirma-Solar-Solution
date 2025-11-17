@@ -1,9 +1,7 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -12,22 +10,45 @@ export default function ContactForm() {
     phone: "",
     city: "",
     message: "",
-  })
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Here you would typically send the form data to your backend
-    alert("Thank you for your inquiry! We will contact you soon.")
-    setFormData({ name: "", email: "", phone: "", city: "", message: "" })
-  }
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Thank you! Your inquiry has been sent.");
+        setFormData({ name: "", email: "", phone: "", city: "", message: "" });
+      } else {
+        alert("Failed to send. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong.");
+    }
+
+    setLoading(false);
+  };
+
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-secondary p-8 rounded-lg border border-border">
@@ -39,7 +60,7 @@ export default function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground"
           placeholder="Your Name"
         />
       </div>
@@ -53,7 +74,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground"
             placeholder="your@email.com"
           />
         </div>
@@ -65,7 +86,7 @@ export default function ContactForm() {
             value={formData.phone}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground"
             placeholder="+91-XXXXXXXXXX"
           />
         </div>
@@ -79,7 +100,7 @@ export default function ContactForm() {
           value={formData.city}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground"
           placeholder="Your City"
         />
       </div>
@@ -92,14 +113,14 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={4}
-          className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+          className="w-full px-4 py-2 rounded-lg bg-background border border-border text-foreground resize-none"
           placeholder="Tell us about your project..."
         />
       </div>
 
-      <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-        Send Inquiry
+      <Button type="submit" disabled={loading} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+        {loading ? "Sending..." : "Send Inquiry"}
       </Button>
     </form>
-  )
+  );
 }
